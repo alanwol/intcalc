@@ -33,7 +33,7 @@ namespace intcalc
             base.DataContext = _viewModel;
 
             periodYears.Text = _viewModel.Period.ToString();
-            housePrize.Text  = _viewModel.HousePrize.ToString();
+            housePrice.Text  = _viewModel.HousePrice.ToString();
             mortgageRate.Text = _viewModel.MortgageRate.ToString();
             maintenanceMonth.Text = _viewModel.Maintenance.ToString();
 
@@ -53,6 +53,8 @@ namespace intcalc
             _viewModel.Save();
             Console.WriteLine("Window closing.");
         }
+
+        // TODO rewrite this to IDataError or something
 
         private bool validateIntegerInput(string input)
         {
@@ -179,11 +181,11 @@ namespace intcalc
             }
         }
 
-        private void housePrize_TextChanged(object sender, TextChangedEventArgs e)
+        private void housePrice_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (housePrize.Text.Length != 0)
+            if (housePrice.Text.Length != 0)
             {
-                _viewModel.HousePrize = getDecimalInput(housePrize.Text);
+                _viewModel.HousePrice = getDecimalInput(housePrice.Text);
             }
         }
 

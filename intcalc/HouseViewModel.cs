@@ -41,7 +41,7 @@ namespace intcalc
                         lines.Add(line);
                     }
 
-                    hc.HousePrize   = Convert.ToDecimal(lines[0]);
+                    hc.HousePrice   = Convert.ToDecimal(lines[0]);
                     period          = Convert.ToInt32(lines[1]);
                     hc.MortgageRate = Convert.ToDecimal(lines[2]);
 
@@ -71,9 +71,9 @@ namespace intcalc
             RentCalculator.Serialize(rcFile, rc);
         }
 
-        public void CalcHousePrize()
+        public void CalcHousePrice()
         {
-            TotalHousePrize = hc.CalcTotalHousePrize(period).ToString("c", numf);
+            TotalHousePrice = hc.CalcTotalHousePrice(period).ToString("c", numf);
             MortgageMonth = hc.MortgageMonth.ToString( "c", numf );
         }
 
@@ -87,13 +87,13 @@ namespace intcalc
             TotalSavings = sc.CalcTotalSavings(period).ToString( "c", numf );
         }
 
-        public decimal HousePrize
+        public decimal HousePrice
         {
-            get { return hc.HousePrize; }
+            get { return hc.HousePrice; }
             set
             {
-                hc.HousePrize = value;
-                CalcHousePrize();
+                hc.HousePrice = value;
+                CalcHousePrice();
             }
         }
 
@@ -103,7 +103,7 @@ namespace intcalc
             set
             {
                 hc.MortgageRate = value;
-                CalcHousePrize();
+                CalcHousePrice();
             }
         }
 
@@ -113,7 +113,7 @@ namespace intcalc
             set
             {
                 hc.MaintenanceMonth = value;
-                CalcHousePrize();
+                CalcHousePrice();
             }
         }
 
@@ -127,13 +127,13 @@ namespace intcalc
             }
         }
 
-        public String TotalHousePrize
+        public String TotalHousePrice
         {
-            get { return totalHousePrize; }
+            get { return totalHousePrice; }
             set
             {
-                totalHousePrize = value;
-                RaisePropertyChanged("TotalHousePrize");
+                totalHousePrice = value;
+                RaisePropertyChanged("TotalHousePrice");
             }
         }
 
@@ -204,7 +204,7 @@ namespace intcalc
             {
                 period = value;
                 CalcRent();
-                CalcHousePrize();
+                CalcHousePrice();
                 CalcSavings();
             }
         }
@@ -224,7 +224,7 @@ namespace intcalc
         HouseCalculator hc;
         RentCalculator rc;
         SavingsCalculator sc;
-        String totalHousePrize;
+        String totalHousePrice;
         String totalRent;
         String totalSavings;
         String mortgageMonth;

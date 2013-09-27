@@ -15,7 +15,7 @@ namespace intcalc
         {
             mortgageRate = 1.0m;
             maintenanceMonth = 0.0m;
-            housePrize = 1;
+            housePrice = 1;
         }
 
         private decimal CalcMaintenance(int period)
@@ -32,7 +32,7 @@ namespace intcalc
             return totalSum;
         }
 
-        public decimal CalcTotalHousePrize(int period)
+        public decimal CalcTotalHousePrice(int period)
         {
             if (period == 0 || mortgageRate < 0.001m)
             {
@@ -43,19 +43,19 @@ namespace intcalc
 
             if (Math.Abs(mortgageRate - 1.0m) < 0.001m)
             {
-                mortgageMonth = housePrize / numMonths;
-                totalHousePrize = housePrize + CalcMaintenance(period);
-                return totalHousePrize;
+                mortgageMonth = housePrice / numMonths;
+                totalHousePrice = housePrice + CalcMaintenance(period);
+                return totalHousePrice;
             }
 
             decimal mortgageRateMonth = (decimal)Math.Pow((double)mortgageRate, 1.0 / 12.0);
 
             // http://nl.wikipedia.org/wiki/Annu%C3%AFteit Annuiteiten formule
-            mortgageMonth = housePrize * (mortgageRateMonth-1.0m)/(1.0m - (decimal)Math.Pow((double)mortgageRateMonth,-numMonths));
+            mortgageMonth = housePrice * (mortgageRateMonth-1.0m)/(1.0m - (decimal)Math.Pow((double)mortgageRateMonth,-numMonths));
 
-            totalHousePrize = mortgageMonth * numMonths + CalcMaintenance(period);
+            totalHousePrice = mortgageMonth * numMonths + CalcMaintenance(period);
 
-            return totalHousePrize;
+            return totalHousePrice;
         }
 
         public static void Deserialize(String filename, ref HouseCalculator hc)
@@ -77,10 +77,10 @@ namespace intcalc
             stream.Close();
         }
 
-        public decimal HousePrize
+        public decimal HousePrice
         {
-            get { return housePrize; }
-            set { housePrize = value; }
+            get { return housePrice; }
+            set { housePrice = value; }
         }
 
         public decimal MortgageRate
@@ -101,8 +101,8 @@ namespace intcalc
             set { maintenanceMonth = value; }
         }
 
-        decimal totalHousePrize;
-        decimal housePrize;
+        decimal totalHousePrice;
+        decimal housePrice;
         decimal mortgageRate;
         decimal mortgageMonth;
         decimal maintenanceMonth;
