@@ -1,0 +1,24 @@
+﻿<Window x:Class="intcalc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:intcalc"
+    Title="IntCalc" Height="600" Width="800" Background="#FFD2FDF7" Closing="window_Closing">
+    <Grid>
+        <TextBox x:Name="housePrize" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="190,65,0,0" PreviewTextInput="numericInt_TextPreview" TextChanged="housePrize_TextChanged"/>
+        <TextBox x:Name="mortgageRate" HorizontalAlignment="Left" Height="24" Margin="190,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="mortgageRate_TextChanged"/>
+        <TextBox x:Name="periodYears" HorizontalAlignment="Left" Height="24" Margin="37,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="periodYears_TextChanged"/>
+        <TextBox x:Name="rentHouseMonth" HorizontalAlignment="Left" Height="24" Margin="422,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="rentHouseMonth_TextChanged"/>
+        <TextBox x:Name="savingsBank" HorizontalAlignment="Left" Height="24" Margin="632,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="savingsBank_TextChanged"/>
+        <TextBox x:Name="interestBank" HorizontalAlignment="Left" Height="24" Margin="632,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="interestBank_TextChanged"/>
+        <Label x:Name="totalRentLabel" Content="{Binding TotalRent}" HorizontalAlignment="Left" Margin="422,174,0,0" VerticalAlignment="Top" Width="120" Background="White" Height="24" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="rentInflation" HorizontalAlignment="Left" Height="24" Margin="422,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="rentInflation_TextChanged"/>
+        <Label x:Name="totalHousePrizeLabel" Content="{Binding TotalHousePrize}" HorizontalAlignment="Left" Margin="190,325,0,0" VerticalAlignment="Top" Background="White" Width="120" Height="24"/>
+        <Label x:Name="totalSavingsLabel" Content="{Binding TotalSavings}" HorizontalAlignment="Left" Margin="632,174,0,0" VerticalAlignment="Top" Background="White" Width="120" Height="24"/>
+        <Label x:Name="mortgageMonth" Content="{Binding MortgageMonth}" HorizontalAlignment="Left" Margin="190,281,0,0" VerticalAlignment="Top" Background="White" Width="120" Height="24"/>
+        <TextBox x:Name="maintenanceMonth" HorizontalAlignment="Left" Height="24" Margin="190,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="maintenanceMonth_TextChanged"/>
+        <Label Content="Period [years]" HorizontalAlignment="Left" Margin="37,21,0,0" VerticalAlignment="Top" Background="White"/>
+        <Label Content="House Price" HorizontalAlignment="Left" Margin="190,21,0,0" VerticalAlignment="Top" Background="White"/>
+        <Label Content="Maintenance" HorizontalAlignment="Left" Margin="190,186,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.395,-0.308" Background="White"/>
+
+    </Grid>
+</Window>
