@@ -17,6 +17,8 @@ namespace intcalc
         public HouseViewModel()
         {
             period    = 10;
+            houseSellPrice = 0m;
+
             hc = new HouseCalculator();
             rc = new RentCalculator();
             sc = new SavingsCalculator();
@@ -73,18 +75,27 @@ namespace intcalc
 
         public void CalcHousePrice()
         {
-            TotalHousePrice = hc.CalcTotalHousePrice(period).ToString("c", numf);
+            totalHousePrice = hc.CalcTotalHousePrice(period);
+            TotalHousePrice = totalHousePrice.ToString("c", numf);
             MortgageMonth = hc.MortgageMonth.ToString( "c", numf );
         }
 
         public void CalcRent()
         {
-            TotalRent = rc.CalcTotalRent(period).ToString("c", numf );
+            totalRent = rc.CalcTotalRent(period);
+            TotalRent = totalRent.ToString("c", numf );
         }
 
         public void CalcSavings()
         {
-            TotalSavings = sc.CalcTotalSavings(period).ToString( "c", numf );
+            totalSavings = sc.CalcTotalSavings(period);
+            TotalSavings = totalSavings.ToString( "c", numf );
+        }
+
+        public void CalcMoneySaved()
+        {
+            decimal saved = totalRent - totalHousePrice - totalSavings + houseSellPrice;
+            MoneySaved = saved.ToString("c", numf);
         }
 
         public decimal HousePrice
@@ -94,6 +105,17 @@ namespace intcalc
             {
                 hc.HousePrice = value;
                 CalcHousePrice();
+                CalcMoneySaved();
+            }
+        }
+
+        public decimal HouseSellPrice
+        {
+            get { return houseSellPrice; }
+            set
+            {
+                houseSellPrice = value;
+                CalcMoneySaved();
             }
         }
 
@@ -104,6 +126,7 @@ namespace intcalc
             {
                 hc.MortgageRate = value;
                 CalcHousePrice();
+                CalcMoneySaved();
             }
         }
 
@@ -114,6 +137,7 @@ namespace intcalc
             {
                 hc.MaintenanceMonth = value;
                 CalcHousePrice();
+                CalcMoneySaved();
             }
         }
 
@@ -129,20 +153,20 @@ namespace intcalc
 
         public String TotalHousePrice
         {
-            get { return totalHousePrice; }
+            get { return totalHousePriceString; }
             set
             {
-                totalHousePrice = value;
+                totalHousePriceString = value;
                 RaisePropertyChanged("TotalHousePrice");
             }
         }
 
         public String TotalRent
         {
-            get { return totalRent; }
+            get { return totalRentString; }
             set 
             { 
-                totalRent = value;
+                totalRentString = value;
                 RaisePropertyChanged("TotalRent");
             }
         }
@@ -154,6 +178,7 @@ namespace intcalc
             {
                 rc.Rent = value;
                 CalcRent();
+                CalcMoneySaved();
             }
         }
 
@@ -164,16 +189,27 @@ namespace intcalc
             {
                 rc.RentInflation = value;
                 CalcRent();
+                CalcMoneySaved();
             }
         }
 
         public String TotalSavings
         {
-            get { return totalSavings; }
+            get { return totalSavingsString; }
             set
             {
-                totalSavings = value;
+                totalSavingsString = value;
                 RaisePropertyChanged("TotalSavings");
+            }
+        }
+
+        public String MoneySaved
+        {
+            get { return moneySaved; }
+            set
+            {
+                moneySaved = value;
+                RaisePropertyChanged("MoneySaved");
             }
         }
 
@@ -184,6 +220,7 @@ namespace intcalc
             {
                 sc.Savings = value;
                 CalcSavings();
+                CalcMoneySaved();
             }
         }
 
@@ -194,6 +231,7 @@ namespace intcalc
             {
                 sc.Interest = value;
                 CalcSavings();
+                CalcMoneySaved();
             }
         }
 
@@ -206,6 +244,7 @@ namespace intcalc
                 CalcRent();
                 CalcHousePrice();
                 CalcSavings();
+                CalcMoneySaved();
             }
         }
 
@@ -224,14 +263,19 @@ namespace intcalc
         HouseCalculator hc;
         RentCalculator rc;
         SavingsCalculator sc;
-        String totalHousePrice;
-        String totalRent;
-        String totalSavings;
+        decimal totalHousePrice;
+        decimal totalRent;
+        decimal totalSavings;
+        String totalHousePriceString;
+        String totalRentString;
+        String totalSavingsString;
         String mortgageMonth;
+        String moneySaved;
         String scFile = "sc.dat";
         String hcFile = "hc.dat";
         String rcFile = "rc.dat";
         int period;
+        decimal houseSellPrice;
 
         NumberFormatInfo numf;
     }

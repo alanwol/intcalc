@@ -48,10 +48,10 @@ namespace intcalc
                 return totalHousePrice;
             }
 
-            decimal mortgageRateMonth = (decimal)Math.Pow((double)mortgageRate, 1.0 / 12.0);
+            decimal mortgageRateMonth = (decimal)Math.Pow((double)mortgageRate, 1.0 / 12.0) -1.0m;
 
             // http://nl.wikipedia.org/wiki/Annu%C3%AFteit Annuiteiten formule
-            mortgageMonth = housePrice * (mortgageRateMonth-1.0m)/(1.0m - (decimal)Math.Pow((double)mortgageRateMonth,-numMonths));
+            mortgageMonth = housePrice * (mortgageRateMonth)/(1.0m - (decimal)Math.Pow((double)(mortgageRateMonth+1.0m),-numMonths));
 
             totalHousePrice = mortgageMonth * numMonths + CalcMaintenance(period);
 

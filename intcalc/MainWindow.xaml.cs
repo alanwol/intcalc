@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
+// TODO Add Input validation rules according to MVVM
 
 namespace intcalc
 {
@@ -42,6 +42,8 @@ namespace intcalc
 
             savingsBank.Text = _viewModel.Savings.ToString();
             interestBank.Text = _viewModel.Interest.ToString();
+
+            houseSellPrice.Text = _viewModel.HouseSellPrice.ToString();
 
             //  We have declared the view model instance declaratively in the xaml.
             //  Get the reference to it here, so we can use it in the button click event.
@@ -218,6 +220,14 @@ namespace intcalc
             if (maintenanceMonth.Text.Length != 0)
             {
                 _viewModel.Maintenance = getDecimalInput(maintenanceMonth.Text);
+            }
+        }
+
+        private void houseSellPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (houseSellPrice.Text.Length != 0)
+            {
+                _viewModel.HouseSellPrice = getDecimalInput(houseSellPrice.Text);
             }
         }
 
