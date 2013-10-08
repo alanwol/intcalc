@@ -4,41 +4,48 @@
         xmlns:local="clr-namespace:intcalc"
     Title="IntCalc" Height="600" Width="800" Background="#FFD2FDF7" Closing="window_Closing">
     <Grid>
+        <Grid.Resources>
+            <Style x:Key="{x:Type Label}" TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Background" Value="White"/>
+            </Style>
+        </Grid.Resources>
         <TextBox x:Name="housePrice" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="190,65,0,0" PreviewTextInput="numericInt_TextPreview" TextChanged="housePrice_TextChanged"/>
         <TextBox x:Name="mortgageRate" HorizontalAlignment="Left" Height="24" Margin="190,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="mortgageRate_TextChanged"/>
         <TextBox x:Name="periodYears" HorizontalAlignment="Left" Height="24" Margin="37,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="periodYears_TextChanged"/>
         <TextBox x:Name="rentHouseMonth" HorizontalAlignment="Left" Height="24" Margin="422,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="rentHouseMonth_TextChanged"/>
         <TextBox x:Name="savingsBank" HorizontalAlignment="Left" Height="24" Margin="632,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="savingsBank_TextChanged"/>
         <TextBox x:Name="interestBank" HorizontalAlignment="Left" Height="24" Margin="632,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="interestBank_TextChanged"/>
-        <Label x:Name="totalRentLabel" Content="{Binding TotalRent}" HorizontalAlignment="Left" Margin="422,395,0,0" VerticalAlignment="Top" Width="120" Background="White" Height="24" HorizontalContentAlignment="Right"/>
+        <Label x:Name="totalRentLabel" Content="{Binding TotalRent}" Margin="422,395,0,0" Width="120" Height="24"/>
         <TextBox x:Name="rentInflation" HorizontalAlignment="Left" Height="24" Margin="422,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="rentInflation_TextChanged"/>
-        <Label x:Name="totalHousePriceLabel" Content="{Binding TotalHousePrice}" HorizontalAlignment="Left" Margin="190,395,0,0" VerticalAlignment="Top" Background="White" Width="120" Height="24"/>
-        <Label x:Name="totalSavingsLabel" Content="{Binding TotalSavings}" HorizontalAlignment="Left" Margin="632,395,0,0" VerticalAlignment="Top" Background="White" Width="120" Height="24"/>
-        <Label x:Name="mortgageMonth" Content="{Binding MortgageMonth}" HorizontalAlignment="Left" Margin="190,306,0,0" VerticalAlignment="Top" Background="White" Width="120" Height="24"/>
+        <Label x:Name="totalHousePriceLabel" Content="{Binding TotalHousePrice}" Margin="190,395,0,0" Width="120" Height="24"/>
+        <Label x:Name="totalSavingsLabel" Content="{Binding TotalSavings}" Margin="632,395,0,0" Width="120" Height="24"/>
+        <Label x:Name="mortgageMonth" Content="{Binding MortgageMonth}" Margin="190,306,0,0" Width="120" Height="24"/>
         <TextBox x:Name="maintenanceMonth" HorizontalAlignment="Left" Height="24" Margin="190,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="maintenanceMonth_TextChanged"/>
-        <Label Content="Period [years]" HorizontalAlignment="Left" Margin="37,21,0,0" VerticalAlignment="Top" Background="White" Width="120"/>
-        <Label Content="House price" HorizontalAlignment="Left" Margin="190,21,0,0" VerticalAlignment="Top" Background="White" Width="120"/>
-        <Label Content="Maintenance [month]" HorizontalAlignment="Left" Margin="190,186,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.395,-0.308" Background="White" Width="120"/>
-        <Label Content="Mortgage rate" HorizontalAlignment="Left" Margin="190,119,0,0" VerticalAlignment="Top" Width="120" Background="White" Height="28"/>
-        <Label Content="Mortgage [month]" HorizontalAlignment="Left" Margin="190,280,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        <Label Content="Rent [month]" HorizontalAlignment="Left" Margin="422,21,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        <Label Content="Rent increase" HorizontalAlignment="Left" Margin="422,119,0,0" VerticalAlignment="Top" Width="120" Background="White" Height="28"/>
-        <Label Content="Savings" HorizontalAlignment="Left" Margin="632,21,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        <Label Content="Interest rate" HorizontalAlignment="Left" Margin="632,119,0,0" VerticalAlignment="Top" Width="120" Background="White" Height="28"/>
-        <Label Content="Total paid for house" HorizontalAlignment="Left" Margin="190,364,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        <Label Content="Total rent paid" HorizontalAlignment="Left" Margin="422,364,0,0" VerticalAlignment="Top" Background="White" Width="120"/>
-        <Label Content="Total savings" HorizontalAlignment="Left" Margin="632,364,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
+        <Label Content="Period [years]" Margin="37,21,0,0" Width="120"/>
+        <Label Content="House price" Margin="190,21,0,0" Width="120"/>
+        <Label Content="Maintenance [month]" Margin="190,186,0,0" Width="120"/>
+        <Label Content="Mortgage rate" Margin="190,119,0,0" Width="120" Height="28"/>
+        <Label Content="Mortgage [month]" Margin="190,280,0,0" Width="120"/>
+        <Label Content="Rent [month]" Margin="422,21,0,0" Width="120"/>
+        <Label Content="Rent increase" Margin="422,119,0,0" Width="120" Height="28"/>
+        <Label Content="Savings" Margin="632,21,0,0" Width="120"/>
+        <Label Content="Interest rate" Margin="632,119,0,0" Width="120" Height="28"/>
+        <Label Content="Total paid for house" Margin="190,364,0,0" Width="120"/>
+        <Label Content="Total rent paid" Margin="422,364,0,0" Width="120"/>
+        <Label Content="Total savings" Margin="632,364,0,0" Width="120"/>
         <TextBox x:Name="houseSellPrice" HorizontalAlignment="Left" Height="23" Margin="422,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="houseSellPrice_TextChanged"/>
-        <Label x:Name="savedMoney" Content="{Binding MoneySaved}" HorizontalAlignment="Left" Margin="632,469,0,0" VerticalAlignment="Top" Height="23" Width="120" Background="White"/>
-        <Label Content="House sell price" HorizontalAlignment="Left" Margin="422,438,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        <Label Content="Money saved" HorizontalAlignment="Left" Margin="632,438,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        <Label Content="Rent saved" HorizontalAlignment="Left" Margin="22,438,0,0" VerticalAlignment="Top" Background="White"/>
-        <Label Content="-" HorizontalAlignment="Left" Margin="107,438,0,0" VerticalAlignment="Top" Background="White"/>
-        <Label Content="Paid for house" HorizontalAlignment="Left" Margin="140,438,0,0" VerticalAlignment="Top" Background="White"/>
-        <Label Content="-" HorizontalAlignment="Left" Margin="244,438,0,0" VerticalAlignment="Top" Background="White"/>
-        <Label Content="Missed savings" HorizontalAlignment="Left" Margin="277,438,0,0" VerticalAlignment="Top" Background="White"/>
-        <Label Content="+" HorizontalAlignment="Left" Margin="384,438,0,0" VerticalAlignment="Top" Background="White"/>
-        <Label Content="=" HorizontalAlignment="Left" Margin="572,438,0,0" VerticalAlignment="Top" Background="White"/>
+        <Label x:Name="savedMoney" Content="{Binding MoneySaved}" Margin="632,469,0,0" Height="23" Width="120"/>
+        <Label Content="House sell price" Margin="422,438,0,0" Width="120"/>
+        <Label Content="Money saved" Margin="632,438,0,0" Width="120"/>
+        <Label Content="Rent saved" Margin="22,438,0,0"/>
+        <Label Content="-" Margin="107,438,0,0"/>
+        <Label Content="Paid for house" Margin="140,438,0,0"/>
+        <Label Content="-" Margin="244,438,0,0"/>
+        <Label Content="Missed savings" Margin="277,438,0,0"/>
+        <Label Content="+" Margin="384,438,0,0"/>
+        <Label Content="=" Margin="572,438,0,0"/>
 
     </Grid>
 </Window>
