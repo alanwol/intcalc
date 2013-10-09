@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 
 // TODO Add Input validation rules according to MVVM
 
@@ -26,6 +29,8 @@ namespace intcalc
 
         public MainWindow()
         {
+            this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+
             InitializeComponent();
 
             _viewModel = new HouseViewModel();
@@ -45,9 +50,8 @@ namespace intcalc
 
             houseSellPrice.Text = _viewModel.HouseSellPrice.ToString();
 
-            //  We have declared the view model instance declaratively in the xaml.
-            //  Get the reference to it here, so we can use it in the button click event.
-            //_viewModel = (HouseViewModel)base.DataContext;
+            sysInfo = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
+            sysUIInfo = (CultureInfo)Thread.CurrentThread.CurrentUICulture.Clone();
         }
 
         private void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -128,7 +132,8 @@ namespace intcalc
             {
                 try
                 {
-                    value = Convert.ToDecimal(input);
+                    value = decimal.Parse(input, CultureInfo.InvariantCulture);
+                    //value = Convert.ToDecimal(input);
                 }
                 catch (OverflowException)
                 {
@@ -231,5 +236,23 @@ namespace intcalc
             }
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("nl-NL");
+
+            this.Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Thread.CurrentThread.CurrentCulture = sysInfo;
+            Thread.CurrentThread.CurrentUICulture = sysUIInfo;
+
+            this.Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
+        }
+
+        private CultureInfo sysInfo;
+        private CultureInfo sysUIInfo;
     }
 }

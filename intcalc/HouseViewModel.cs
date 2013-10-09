@@ -24,9 +24,6 @@ namespace intcalc
             sc = new SavingsCalculator();
 
             ReadInputData();
-
-            CultureInfo nl = new CultureInfo("nl-NL");
-            numf = nl.NumberFormat;
         }
 
         private void ReadInputData()
@@ -75,27 +72,24 @@ namespace intcalc
 
         public void CalcHousePrice()
         {
-            totalHousePrice = hc.CalcTotalHousePrice(period);
-            TotalHousePrice = totalHousePrice.ToString("c", numf);
-            MortgageMonth = hc.MortgageMonth.ToString( "c", numf );
+            TotalHousePrice = hc.CalcTotalHousePrice(period);
+            MortgageMonth = hc.MortgageMonth;
         }
 
         public void CalcRent()
         {
-            totalRent = rc.CalcTotalRent(period);
-            TotalRent = totalRent.ToString("c", numf );
+            TotalRent = rc.CalcTotalRent(period);
         }
 
         public void CalcSavings()
         {
-            totalSavings = sc.CalcTotalSavings(period);
-            TotalSavings = totalSavings.ToString( "c", numf );
+            TotalSavings = sc.CalcTotalSavings(period);
         }
 
         public void CalcMoneySaved()
         {
             decimal saved = totalRent - totalHousePrice - totalSavings + houseSellPrice;
-            MoneySaved = saved.ToString("c", numf);
+            MoneySaved = saved;
         }
 
         public decimal HousePrice
@@ -124,6 +118,7 @@ namespace intcalc
             get { return hc.MortgageRate; }
             set
             {
+                Debug.Assert(value < 2.0m);
                 hc.MortgageRate = value;
                 CalcHousePrice();
                 CalcMoneySaved();
@@ -141,7 +136,7 @@ namespace intcalc
             }
         }
 
-        public String MortgageMonth
+        public decimal MortgageMonth
         {
             get { return mortgageMonth; }
             set
@@ -151,22 +146,22 @@ namespace intcalc
             }
         }
 
-        public String TotalHousePrice
+        public decimal TotalHousePrice
         {
-            get { return totalHousePriceString; }
+            get { return totalHousePrice; }
             set
             {
-                totalHousePriceString = value;
+                totalHousePrice = value;
                 RaisePropertyChanged("TotalHousePrice");
             }
         }
 
-        public String TotalRent
+        public decimal TotalRent
         {
-            get { return totalRentString; }
+            get { return totalRent; }
             set 
             { 
-                totalRentString = value;
+                totalRent = value;
                 RaisePropertyChanged("TotalRent");
             }
         }
@@ -187,23 +182,24 @@ namespace intcalc
             get { return rc.RentInflation; }
             set
             {
+                Debug.Assert(value < 2.0m);
                 rc.RentInflation = value;
                 CalcRent();
                 CalcMoneySaved();
             }
         }
 
-        public String TotalSavings
+        public decimal TotalSavings
         {
-            get { return totalSavingsString; }
+            get { return totalSavings; }
             set
             {
-                totalSavingsString = value;
+                totalSavings = value;
                 RaisePropertyChanged("TotalSavings");
             }
         }
 
-        public String MoneySaved
+        public decimal MoneySaved
         {
             get { return moneySaved; }
             set
@@ -229,6 +225,7 @@ namespace intcalc
             get { return sc.Interest; }
             set
             {
+                Debug.Assert(value < 2.0m);
                 sc.Interest = value;
                 CalcSavings();
                 CalcMoneySaved();
@@ -266,17 +263,12 @@ namespace intcalc
         decimal totalHousePrice;
         decimal totalRent;
         decimal totalSavings;
-        String totalHousePriceString;
-        String totalRentString;
-        String totalSavingsString;
-        String mortgageMonth;
-        String moneySaved;
+        decimal mortgageMonth;
+        decimal moneySaved;
         String scFile = "sc.dat";
         String hcFile = "hc.dat";
         String rcFile = "rc.dat";
         int period;
         decimal houseSellPrice;
-
-        NumberFormatInfo numf;
     }
 }

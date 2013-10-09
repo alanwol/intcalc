@@ -17,11 +17,11 @@
         <TextBox x:Name="rentHouseMonth" HorizontalAlignment="Left" Height="24" Margin="422,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="rentHouseMonth_TextChanged"/>
         <TextBox x:Name="savingsBank" HorizontalAlignment="Left" Height="24" Margin="632,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="savingsBank_TextChanged"/>
         <TextBox x:Name="interestBank" HorizontalAlignment="Left" Height="24" Margin="632,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="interestBank_TextChanged"/>
-        <Label x:Name="totalRentLabel" Content="{Binding TotalRent}" Margin="422,395,0,0" Width="120" Height="24"/>
+        <Label Content="{Binding TotalRent}" ContentStringFormat='C' Margin="422,395,0,0" Width="120" Height="24"/>
         <TextBox x:Name="rentInflation" HorizontalAlignment="Left" Height="24" Margin="422,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="rentInflation_TextChanged"/>
-        <Label x:Name="totalHousePriceLabel" Content="{Binding TotalHousePrice}" Margin="190,395,0,0" Width="120" Height="24"/>
-        <Label x:Name="totalSavingsLabel" Content="{Binding TotalSavings}" Margin="632,395,0,0" Width="120" Height="24"/>
-        <Label x:Name="mortgageMonth" Content="{Binding MortgageMonth}" Margin="190,306,0,0" Width="120" Height="24"/>
+        <Label Content="{Binding TotalHousePrice}" ContentStringFormat='C' Margin="190,395,0,0" Width="120" Height="24"/>
+        <Label Content="{Binding TotalSavings}" ContentStringFormat='C' Margin="632,395,0,0" Width="120" Height="24"/>
+        <Label Content="{Binding MortgageMonth}" ContentStringFormat='C' Margin="190,306,0,0" Width="120" Height="24"/>
         <TextBox x:Name="maintenanceMonth" HorizontalAlignment="Left" Height="24" Margin="190,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="maintenanceMonth_TextChanged"/>
         <Label Content="Period [years]" Margin="37,21,0,0" Width="120"/>
         <Label Content="House price" Margin="190,21,0,0" Width="120"/>
@@ -36,7 +36,7 @@
         <Label Content="Total rent paid" Margin="422,364,0,0" Width="120"/>
         <Label Content="Total savings" Margin="632,364,0,0" Width="120"/>
         <TextBox x:Name="houseSellPrice" HorizontalAlignment="Left" Height="23" Margin="422,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="houseSellPrice_TextChanged"/>
-        <Label x:Name="savedMoney" Content="{Binding MoneySaved}" Margin="632,469,0,0" Height="23" Width="120"/>
+        <Label Content="{Binding MoneySaved}" ContentStringFormat='C' Margin="632,469,0,0" Height="23" Width="120"/>
         <Label Content="House sell price" Margin="422,438,0,0" Width="120"/>
         <Label Content="Money saved" Margin="632,438,0,0" Width="120"/>
         <Label Content="Rent saved" Margin="22,438,0,0"/>
@@ -46,6 +46,7 @@
         <Label Content="Missed savings" Margin="277,438,0,0"/>
         <Label Content="+" Margin="384,438,0,0"/>
         <Label Content="=" Margin="572,438,0,0"/>
+        <CheckBox Content="Force euro" HorizontalAlignment="Left" Margin="22,528,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
 
     </Grid>
 </Window>
