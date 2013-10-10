@@ -10,13 +10,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Globalization;
 using System.Threading;
 
+// http://joshsmithonwpf.wordpress.com/2008/11/14/using-a-viewmodel-to-provide-meaningful-validation-error-messages/
+
 namespace intcalc
 {
-    class HouseViewModel : INotifyPropertyChanged
+    class HouseViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         public HouseViewModel()
         {
             period    = 10;
+            mortgagePeriod = 30;
             houseSellPrice = 0m;
 
             hc = new HouseCalculator();
@@ -61,6 +64,8 @@ namespace intcalc
             SavingsCalculator.Deserialize(scFile, ref sc);
             HouseCalculator.Deserialize(hcFile, ref hc);
             RentCalculator.Deserialize(rcFile, ref rc);
+
+            Interest = sc.Interest;
         }
 
         public void Save()
@@ -72,8 +77,8 @@ namespace intcalc
 
         public void CalcHousePrice()
         {
-            TotalHousePrice = hc.CalcTotalHousePrice(period);
-            MortgageMonth = hc.MortgageMonth;
+            TotalHousePrice = hc.CalcTotalHousePrice(mortgagePeriod);
+            MortgageMonth   = hc.MortgageMonth;
         }
 
         public void CalcRent()
@@ -88,7 +93,7 @@ namespace intcalc
 
         public void CalcMoneySaved()
         {
-            decimal saved = totalRent - totalHousePrice - totalSavings + houseSellPrice;
+            decimal saved = TotalRent - TotalHousePrice - TotalSavings + HouseSellPrice;
             MoneySaved = saved;
         }
 
@@ -222,13 +227,11 @@ namespace intcalc
 
         public decimal Interest
         {
-            get { return sc.Interest; }
+            get { return interest; }
             set
             {
-                Debug.Assert(value < 2.0m);
-                sc.Interest = value;
-                CalcSavings();
-                CalcMoneySaved();
+                interest = value; 
+                RaisePropertyChanged("Interest");
             }
         }
 
@@ -239,9 +242,22 @@ namespace intcalc
             {
                 period = value;
                 CalcRent();
-                CalcHousePrice();
+                //CalcHousePrice(); Should be replaced with calculation of paid so far and debt remaining
                 CalcSavings();
                 CalcMoneySaved();
+                //RaisePropertyChanged("Period");
+            }
+        }
+
+        public int MortgagePeriod
+        {
+            get { return mortgagePeriod; }
+            set
+            {
+                mortgagePeriod = value;
+                CalcHousePrice();
+                CalcMoneySaved();
+                //RaisePropertyChanged("MortgagePeriod");
             }
         }
 
@@ -257,6 +273,46 @@ namespace intcalc
             }
         }
 
+        public string Error
+        {
+            get { return sc.Error; }
+        }
+
+        public string this[string property]
+        {
+            get
+            {
+                if (property == "Interest")
+                {
+                    decimal it;
+                    string val = ValidateInterest(out it);
+
+                    if (!String.IsNullOrEmpty(val)) return val;
+
+                    sc.Interest = it;
+                    CalcSavings();
+                    CalcMoneySaved();
+                }
+
+                return sc[property];
+            }
+        }
+
+        string ValidateInterest(out decimal it)
+        {
+            it = 1.0m;
+
+            string val = null;
+
+            if (interest >= 1.0m && interest < 2.0m)
+            {
+                it = interest;
+            }
+            else val = "Invalid decimal!";
+
+            return val;
+        }
+
         HouseCalculator hc;
         RentCalculator rc;
         SavingsCalculator sc;
@@ -268,7 +324,9 @@ namespace intcalc
         String scFile = "sc.dat";
         String hcFile = "hc.dat";
         String rcFile = "rc.dat";
+        decimal interest;
         int period;
+        int mortgagePeriod;
         decimal houseSellPrice;
     }
 }

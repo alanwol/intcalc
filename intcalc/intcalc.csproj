@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InterestInputRule.cs" />
     <Compile Include="RentCalculator.cs" />
     <Compile Include="SavingsCalculator.cs" />
     <Page Include="MainWindow.xaml">

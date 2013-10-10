@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.ComponentModel;
 
 namespace intcalc
 {
     [Serializable()]
-    class SavingsCalculator
+    class SavingsCalculator : IDataErrorInfo
     {
         public decimal CalcTotalSavings(int period)
         {
@@ -57,5 +58,23 @@ namespace intcalc
         decimal totalSavings;
         decimal savings;
         decimal interest;
+
+        public string Error { get { return null; } }
+
+        public string this[string property]
+        {
+            get
+            {
+                if (property == "Interest")
+                {
+                    if (this.Interest >= 2.0m)
+                    {
+                        return "Interest cannot be >= 2.0";
+                    }
+                }
+
+                return null;
+            }
+        }
     }
 }

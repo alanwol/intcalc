@@ -16,7 +16,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 
-// TODO Add Input validation rules according to MVVM
 
 namespace intcalc
 {
@@ -36,19 +35,6 @@ namespace intcalc
             _viewModel = new HouseViewModel();
 
             base.DataContext = _viewModel;
-
-            periodYears.Text = _viewModel.Period.ToString();
-            housePrice.Text  = _viewModel.HousePrice.ToString();
-            mortgageRate.Text = _viewModel.MortgageRate.ToString();
-            maintenanceMonth.Text = _viewModel.Maintenance.ToString();
-
-            rentHouseMonth.Text = _viewModel.Rent.ToString();
-            rentInflation.Text = _viewModel.RentInflation.ToString();
-
-            savingsBank.Text = _viewModel.Savings.ToString();
-            interestBank.Text = _viewModel.Interest.ToString();
-
-            houseSellPrice.Text = _viewModel.HouseSellPrice.ToString();
 
             sysInfo = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
             sysUIInfo = (CultureInfo)Thread.CurrentThread.CurrentUICulture.Clone();
@@ -111,7 +97,7 @@ namespace intcalc
             {
                 if (!Char.IsDigit(input[i]))
                 {
-                    if (!dotFound && input[i] == '.')
+                    if (!dotFound && ( input[i] == '.' || input[i] == ',') )
                     {
                         dotFound = true;
                         continue;
@@ -132,7 +118,8 @@ namespace intcalc
             {
                 try
                 {
-                    value = decimal.Parse(input, CultureInfo.InvariantCulture);
+                    value = decimal.Parse(input);
+                    //value = decimal.Parse(input, CultureInfo.InvariantCulture);
                     //value = Convert.ToDecimal(input);
                 }
                 catch (OverflowException)
@@ -254,5 +241,13 @@ namespace intcalc
 
         private CultureInfo sysInfo;
         private CultureInfo sysUIInfo;
+
+        private void mortgagePeriod_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (mortgagePeriod.Text.Length != 0)
+            {
+                _viewModel.MortgagePeriod = getIntInput(mortgagePeriod.Text);
+            }
+        }
     }
 }
