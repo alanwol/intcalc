@@ -12,6 +12,12 @@ namespace intcalc
     [Serializable()]
     class SavingsCalculator : IDataErrorInfo
     {
+        public SavingsCalculator()
+        {
+            savings = 50000m;
+            interest = 1.02m;
+        }
+
         public decimal CalcTotalSavings(int period)
         {
             totalSavings = savings;

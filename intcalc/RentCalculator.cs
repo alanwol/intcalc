@@ -13,8 +13,8 @@ namespace intcalc
     {
         public RentCalculator()
         {
-            monthlyRent = 1;
-            rentInflation = 1.0m;
+            monthlyRent = 500m;
+            rentInflation = 1.03m;
         }
 
         public static void Deserialize(String filename, ref RentCalculator rc)

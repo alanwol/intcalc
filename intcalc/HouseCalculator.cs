@@ -13,9 +13,9 @@ namespace intcalc
     {
         public HouseCalculator()
         {
-            mortgageRate = 1.0m;
-            maintenanceMonth = 0.0m;
-            housePrice = 1;
+            mortgageRate = 1.05m;
+            maintenanceMonth = 150.0m;
+            housePrice = 100000m;
         }
 
         private decimal CalcMaintenance(int period)
