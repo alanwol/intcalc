@@ -12,7 +12,7 @@
             </Style>
         </Grid.Resources>
         <TextBox x:Name="housePrice" Text="{Binding HousePrice}" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="120" Margin="190,65,0,0" PreviewTextInput="numericInt_TextPreview" TextChanged="housePrice_TextChanged"/>
-        <TextBox x:Name="mortgageRate" Text="{Binding MortgageRate}" HorizontalAlignment="Left" Height="24" Margin="190,147,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="mortgageRate_TextChanged"/>
+        <TextBox x:Name="mortgageRate" Text="{Binding MortgageRate, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="24" Margin="190,147,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="mortgageRate_TextChanged"/>
         <TextBox x:Name="periodYears" Text="{Binding Period}" HorizontalAlignment="Left" Height="24" Margin="37,65,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="periodYears_TextChanged"/>
         <TextBox x:Name="rentHouseMonth" Text="{Binding Rent}" HorizontalAlignment="Left" Height="24" Margin="422,65,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="rentHouseMonth_TextChanged"/>
         <TextBox x:Name="savingsBank" Text="{Binding Savings}" HorizontalAlignment="Left" Height="24" Margin="632,65,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="savingsBank_TextChanged"/>
@@ -20,7 +20,7 @@
         <TextBox x:Name="interestBank" Text="{Binding Interest, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="24" Margin="632,147,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="interestBank_TextChanged"/>
 
         <Label Content="{Binding TotalRent}" ContentStringFormat='C' Margin="422,395,0,0" Width="120" Height="24"/>
-        <TextBox x:Name="rentInflation" Text="{Binding RentInflation}" HorizontalAlignment="Left" Height="24" Margin="422,147,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="rentInflation_TextChanged"/>
+        <TextBox x:Name="rentInflation" Text="{Binding RentInflation, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="24" Margin="422,147,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="rentInflation_TextChanged"/>
         <Label Content="{Binding TotalHousePrice}" ContentStringFormat='C' Margin="190,395,0,0" Width="120" Height="24"/>
         <Label Content="{Binding TotalSavings}" ContentStringFormat='C' Margin="632,395,0,0" Width="120" Height="24"/>
         <Label Content="{Binding MortgageMonth}" ContentStringFormat='C' Margin="190,306,0,0" Width="120" Height="24"/>

@@ -73,9 +73,9 @@ namespace intcalc
             {
                 if (property == "Interest")
                 {
-                    if (this.Interest >= 2.0m)
+                    if (this.Interest < 1.0m || this.Interest >= 2.0m)
                     {
-                        return "Interest cannot be >= 2.0";
+                        return "Interest cannot be < 1.0 or >= 2.0";
                     }
                 }
 
