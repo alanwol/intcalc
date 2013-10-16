@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="period">Periode [ jaar ]</system:String>
+    <system:String x:Key="houseprice">Huisprijs</system:String>
+    <system:String x:Key="maintenance">Onderhoud [ maand ]</system:String>
+    <system:String x:Key="mortgagerate">Hypotheekrente</system:String>
+    <system:String x:Key="mortgagemonth">Hypotheek [ maand ]</system:String>
+    <system:String x:Key="rentmonth">Huur [ maand ]</system:String>
+    <system:String x:Key="rentinc">Huur verhoging</system:String>
+    <system:String x:Key="savings">Spaargeld</system:String>
+    <system:String x:Key="interest">Rente</system:String>
+    <system:String x:Key="totalpaidhouse">Totaal betaald voor huis</system:String>
+    <system:String x:Key="totalrentpaid">Totaal huur betaald</system:String>
+    <system:String x:Key="totalsavings">Totaal spaargeld</system:String>
+    <system:String x:Key="housesellprice">Verkoopprijs huis</system:String>
+    <system:String x:Key="moneysaved">Geld bespaard</system:String>
+    <system:String x:Key="rentsaved">Huur bespaard</system:String>
+    <system:String x:Key="paidhouse">Betaald voor huis</system:String>
+    <system:String x:Key="missedsavings">Misgelopen spaargeld</system:String>
+    <system:String x:Key="forceeuro">Forceer euro</system:String>
+    <system:String x:Key="mortgageperiod">Hypotheek periode</system:String>
+</ResourceDictionary>

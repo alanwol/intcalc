@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="period">Period [ years ]</system:String>
+    <system:String x:Key="houseprice">House price</system:String>
+    <system:String x:Key="maintenance">Maintenance [ month ]</system:String>
+    <system:String x:Key="mortgagerate">Mortgage rate</system:String>
+    <system:String x:Key="mortgagemonth">Mortgage [ month ]</system:String>
+    <system:String x:Key="rentmonth">Rent [ month ]</system:String>
+    <system:String x:Key="rentinc">Rent increase</system:String>
+    <system:String x:Key="savings">Savings</system:String>
+    <system:String x:Key="interest">Interest rate</system:String>
+    <system:String x:Key="totalpaidhouse">Total paid for house</system:String>
+    <system:String x:Key="totalrentpaid">Total rent paid</system:String>
+    <system:String x:Key="totalsavings">Total savings</system:String>
+    <system:String x:Key="housesellprice">House sell price</system:String>
+    <system:String x:Key="moneysaved">Money saved</system:String>
+    <system:String x:Key="rentsaved">Rent saved</system:String>
+    <system:String x:Key="paidhouse">Paid for house</system:String>
+    <system:String x:Key="missedsavings">Missed savings</system:String>
+    <system:String x:Key="forceeuro">Force euro</system:String>
+    <system:String x:Key="mortgageperiod">Mortgage period</system:String>
+</ResourceDictionary>
