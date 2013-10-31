@@ -63,10 +63,6 @@ namespace intcalc
             set { rentInflation = value; }
         }
 
-        decimal totalRent;
-        decimal monthlyRent;
-        decimal rentInflation;
-
         public string Error { get { return null; } }
 
         public string this[string property]
@@ -75,14 +71,18 @@ namespace intcalc
             {
                 if (property == "RentInflation")
                 {
-                    if (this.RentInflation >= 2.0m)
+                    if (this.RentInflation < 1.0m || this.RentInflation >= 2.0m)
                     {
-                        return "Rent inflation cannot be >= 2.0";
+                        return "Rent inflation cannot be < 1.0 or >= 2.0";
                     }
                 }
 
                 return null;
             }
         }
+
+        decimal totalRent;
+        decimal monthlyRent;
+        decimal rentInflation;
     }
 }

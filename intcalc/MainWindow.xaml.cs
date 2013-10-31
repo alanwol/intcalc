@@ -29,6 +29,7 @@ namespace intcalc
         public MainWindow()
         {
             this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+            SetLanguageDictionary();
 
             InitializeComponent();
 
@@ -249,5 +250,25 @@ namespace intcalc
                 _viewModel.MortgagePeriod = getIntInput(mortgagePeriod.Text);
             }
         }
+
+        private void SetLanguageDictionary()
+        {
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (Thread.CurrentThread.CurrentCulture.ToString())
+            {
+                case "en-US":
+                    dict.Source = new Uri("..\\localization\\guistrings.xaml",
+                                  UriKind.Relative);
+                    break;
+                case "nl-NL":
+                    dict.Source = new Uri("..\\localization\\guistrings.nl-NL.xaml", UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("..\\localization\\guistrings.xaml", UriKind.Relative);
+                    break;
+            }
+            this.Resources.MergedDictionaries.Add(dict);
+        }
+
     }
 }

@@ -18,7 +18,7 @@ namespace intcalc
     {
         public HouseViewModel()
         {
-            period    = 10;
+            period         = 10;
             mortgagePeriod = 30;
             houseSellPrice = 0m;
 
@@ -33,6 +33,7 @@ namespace intcalc
 
         private void ReadInputData()
         {
+            /*
             try
             {
                 using (StreamReader sr = new StreamReader("input.txt"))
@@ -62,12 +63,13 @@ namespace intcalc
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
-
+            */
             SavingsCalculator.Deserialize(scFile, ref sc);
             HouseCalculator.Deserialize(hcFile, ref hc);
             RentCalculator.Deserialize(rcFile, ref rc);
 
-            Interest = sc.Interest;
+            Interest      = sc.Interest;
+            MortgageRate  = hc.MortgageRate;
             RentInflation = rc.RentInflation;
         }
 
@@ -123,13 +125,11 @@ namespace intcalc
 
         public decimal MortgageRate
         {
-            get { return hc.MortgageRate; }
+            get { return mortgageRate; }
             set
             {
-                Debug.Assert(value < 2.0m);
-                hc.MortgageRate = value;
-                CalcHousePrice();
-                CalcMoneySaved();
+                mortgageRate = value;
+                RaisePropertyChanged("MortgageRate");
             }
         }
 
@@ -297,14 +297,13 @@ namespace intcalc
 
         public string Error
         {
-            get { return sc.Error; }
+            get { return null; }
         }
 
         public string this[string property]
         {
             get
             {
-                string res = null; 
                 switch (property)
                 {
                     case "Interest":
@@ -317,37 +316,48 @@ namespace intcalc
                             sc.Interest = it;
                             CalcSavings();
                             CalcMoneySaved();
-                            res = sc[property];
                         }
-                        break;
+
+                        return sc[property];
+                    case "MortgageRate":
+                       {
+                           decimal rate;
+                           string val = ValidateInterest(mortgageRate, out rate);
+
+                           if (!String.IsNullOrEmpty(val)) return val;
+
+                           hc.MortgageRate = rate;
+                           CalcHousePrice();
+                           CalcMoneySaved();
+                       }
+                       return hc[property];
                     case "RentInflation":
-                        {
-                            decimal it;
-                            string val = ValidateInterest(rentInflation, out it);
+                       {
+                           decimal ri;
+                           string val = ValidateInterest(rentInflation, out ri);
 
-                            if (!String.IsNullOrEmpty(val)) return val;
+                           if (!String.IsNullOrEmpty(val)) return val;
 
-                            rc.RentInflation = it;
-                            CalcRent();
-                            CalcMoneySaved();
-                            res = rc[property];
-                        }
-                        break;
+                           rc.RentInflation = ri;
+                           CalcRent();
+                           CalcMoneySaved();
+                       }
+                        return rc[property];
+                    default:
+                        return "Error not a valid property";
                 }
-
-                return res;
             }
         }
 
-        string ValidateInterest(decimal input, out decimal it)
+        string ValidateInterest(decimal rate, out decimal it)
         {
             it = 1.0m;
 
             string val = null;
 
-            if (input >= 1.0m && input < 2.0m)
+            if (rate >= 1.0m && rate < 2.0m)
             {
-                it = input;
+                it = rate;
             }
             else val = "Invalid decimal!";
 
@@ -366,6 +376,7 @@ namespace intcalc
         String hcFile = "hc.dat";
         String rcFile = "rc.dat";
         decimal interest;
+        decimal mortgageRate;
         decimal rentInflation;
         int period;
         int mortgagePeriod;

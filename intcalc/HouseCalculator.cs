@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.ComponentModel;
 
 namespace intcalc
 {
     [Serializable()]
-    class HouseCalculator
+    class HouseCalculator : IDataErrorInfo
     {
         public HouseCalculator()
         {
@@ -99,6 +100,24 @@ namespace intcalc
         {
             get { return maintenanceMonth; }
             set { maintenanceMonth = value; }
+        }
+
+        public string Error { get { return null; } }
+
+        public string this[string property]
+        {
+            get
+            {
+                if (property == "MortgageRate")
+                {
+                    if (this.MortgageRate < 1.0m || this.MortgageRate >= 2.0m)
+                    {
+                        return "Mortgage rate cannot be < 1.0 or >= 2.0";
+                    }
+                }
+
+                return null;
+            }
         }
 
         decimal totalHousePrice;

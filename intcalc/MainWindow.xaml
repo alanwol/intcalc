@@ -12,7 +12,7 @@
             </Style>
         </Grid.Resources>
         <TextBox x:Name="housePrice" Text="{Binding HousePrice}" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="120" Margin="190,65,0,0" PreviewTextInput="numericInt_TextPreview" TextChanged="housePrice_TextChanged"/>
-        <TextBox x:Name="mortgageRate" Text="{Binding MortgageRate}" HorizontalAlignment="Left" Height="24" Margin="190,147,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="mortgageRate_TextChanged"/>
+        <TextBox x:Name="mortgageRate" Text="{Binding MortgageRate, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="24" Margin="190,147,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericReal_TextPreview" TextChanged="mortgageRate_TextChanged"/>
         <TextBox x:Name="periodYears" Text="{Binding Period}" HorizontalAlignment="Left" Height="24" Margin="37,65,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="periodYears_TextChanged"/>
         <TextBox x:Name="rentHouseMonth" Text="{Binding Rent}" HorizontalAlignment="Left" Height="24" Margin="422,65,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="rentHouseMonth_TextChanged"/>
         <TextBox x:Name="savingsBank" Text="{Binding Savings}" HorizontalAlignment="Left" Height="24" Margin="632,65,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="savingsBank_TextChanged"/>
@@ -25,32 +25,32 @@
         <Label Content="{Binding TotalSavings}" ContentStringFormat='C' Margin="632,395,0,0" Width="120" Height="24"/>
         <Label Content="{Binding MortgageMonth}" ContentStringFormat='C' Margin="190,306,0,0" Width="120" Height="24"/>
         <TextBox x:Name="maintenanceMonth" Text="{Binding Maintenance}" HorizontalAlignment="Left" Height="24" Margin="190,227,0,0" VerticalAlignment="Top" Width="120" TextChanged="maintenanceMonth_TextChanged"/>
-        <Label Content="Period [ years ]" Margin="37,21,0,0" Width="120"/>
-        <Label Content="House price" Margin="190,21,0,0" Width="120"/>
-        <Label Content="Maintenance [ month ]" Margin="190,186,0,0" Width="120"/>
-        <Label Content="Mortgage rate" Margin="190,119,0,0" Width="120" Height="28"/>
-        <Label Content="Mortgage [ month ]" Margin="190,280,0,0" Width="120"/>
-        <Label Content="Rent [ month ]" Margin="422,21,0,0" Width="120"/>
-        <Label Content="Rent increase" Margin="422,119,0,0" Width="120" Height="28"/>
-        <Label Content="Savings" Margin="632,21,0,0" Width="120"/>
-        <Label Content="Interest rate" Margin="632,119,0,0" Width="120" Height="28"/>
-        <Label Content="Total paid for house" Margin="190,364,0,0" Width="120"/>
-        <Label Content="Total rent paid" Margin="422,364,0,0" Width="120"/>
-        <Label Content="Total savings" Margin="632,364,0,0" Width="120"/>
+        <Label Content="{DynamicResource period}" Margin="37,21,0,0" Width="120"/>
+        <Label Content="{DynamicResource houseprice}" Margin="190,21,0,0" Width="120"/>
+        <Label Content="{DynamicResource maintenance}" Margin="190,186,0,0" Width="120"/>
+        <Label Content="{DynamicResource mortgagerate}" Margin="190,119,0,0" Width="120" Height="28"/>
+        <Label Content="{DynamicResource mortgagemonth}" Margin="190,280,0,0" Width="120"/>
+        <Label Content="{DynamicResource rentmonth}" Margin="422,21,0,0" Width="120"/>
+        <Label Content="{DynamicResource rentinc}" Margin="422,119,0,0" Width="120" Height="28"/>
+        <Label Content="{DynamicResource savings}" Margin="632,21,0,0" Width="120"/>
+        <Label Content="{DynamicResource interest}" Margin="632,119,0,0" Width="120" Height="28"/>
+        <Label Content="{DynamicResource totalpaidhouse}" Margin="190,364,0,0" Width="120"/>
+        <Label Content="{DynamicResource totalrentpaid}" Margin="422,364,0,0" Width="120"/>
+        <Label Content="{DynamicResource totalsavings}" Margin="632,364,0,0" Width="120"/>
         <TextBox x:Name="houseSellPrice" Text="{Binding HouseSellPrice}" HorizontalAlignment="Left" Height="23" Margin="422,469,0,0" VerticalAlignment="Top" Width="120" PreviewTextInput="numericInt_TextPreview" TextChanged="houseSellPrice_TextChanged"/>
         <Label Content="{Binding MoneySaved}" ContentStringFormat='C' Margin="632,469,0,0" Height="23" Width="120"/>
-        <Label Content="House sell price" Margin="422,438,0,0" Width="120"/>
-        <Label Content="Money saved" Margin="632,438,0,0" Width="120"/>
-        <Label Content="Rent saved" Margin="22,438,0,0"/>
+        <Label Content="{DynamicResource housesellprice}" Margin="422,438,0,0" Width="120"/>
+        <Label Content="{DynamicResource moneysaved}" Margin="632,438,0,0" Width="120"/>
+        <Label Content="{DynamicResource rentsaved}" Margin="22,438,0,0"/>
         <Label Content="-" Margin="107,438,0,0"/>
-        <Label Content="Paid for house" Margin="140,438,0,0"/>
+        <Label Content="{DynamicResource paidhouse}" Margin="140,438,0,0"/>
         <Label Content="-" Margin="244,438,0,0"/>
-        <Label Content="Missed savings" Margin="277,438,0,0"/>
+        <Label Content="{DynamicResource missedsavings}" Margin="277,438,0,0"/>
         <Label Content="+" Margin="384,438,0,0"/>
         <Label Content="=" Margin="572,438,0,0"/>
-        <CheckBox Content="Force euro" HorizontalAlignment="Left" Margin="22,528,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <CheckBox Content="{DynamicResource forceeuro}" HorizontalAlignment="Left" Margin="22,528,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
         <TextBox x:Name="mortgagePeriod" HorizontalAlignment="Left" Height="23" Margin="37,147,0,0" Text="{Binding MortgagePeriod}" PreviewTextInput="numericInt_TextPreview" VerticalAlignment="Top" Width="120" TextChanged="mortgagePeriod_TextChanged"/>
-        <Label Content="Mortgage period" HorizontalAlignment="Left" Margin="37,119,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
+        <Label Content="{DynamicResource mortgageperiod}" HorizontalAlignment="Left" Margin="37,119,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
 
     </Grid>
 </Window>
