@@ -27,6 +27,8 @@ namespace intcalc
             sc = new SavingsCalculator();
 
             ReadInputData();
+
+            this.PropertyChanged += HandlePropertyChanged;
         }
 
         private void ReadInputData()
@@ -66,6 +68,7 @@ namespace intcalc
             RentCalculator.Deserialize(rcFile, ref rc);
 
             Interest = sc.Interest;
+            RentInflation = rc.RentInflation;
         }
 
         public void Save()
@@ -184,13 +187,14 @@ namespace intcalc
 
         public decimal RentInflation
         {
-            get { return rc.RentInflation; }
+            get { return rentInflation; }
             set
             {
-                Debug.Assert(value < 2.0m);
-                rc.RentInflation = value;
-                CalcRent();
-                CalcMoneySaved();
+                //Debug.Assert(value < 2.0m);
+                rentInflation = value;
+                RaisePropertyChanged("RentInflation");
+                //CalcRent();
+                //CalcMoneySaved();
             }
         }
 
@@ -241,11 +245,7 @@ namespace intcalc
             set 
             {
                 period = value;
-                CalcRent();
-                //CalcHousePrice(); Should be replaced with calculation of paid so far and debt remaining
-                CalcSavings();
-                CalcMoneySaved();
-                //RaisePropertyChanged("Period");
+                RaisePropertyChanged("Period");
             }
         }
 
@@ -255,9 +255,7 @@ namespace intcalc
             set
             {
                 mortgagePeriod = value;
-                CalcHousePrice();
-                CalcMoneySaved();
-                //RaisePropertyChanged("MortgagePeriod");
+                RaisePropertyChanged("MortgagePeriod");
             }
         }
 
@@ -273,6 +271,30 @@ namespace intcalc
             }
         }
 
+        void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "Interest":
+                    Console.WriteLine("Interest changed.");
+                    break;
+                case "RentInflation":
+                    Console.WriteLine("Rent inflation changed.");
+                    break;
+                case "MortgagePeriod":
+                    Console.WriteLine("Mortgage period changed.");
+                    CalcHousePrice();
+                    CalcMoneySaved();
+                    break;
+                case "Period":
+                    CalcRent();
+                    //CalcHousePrice(); Should be replaced with calculation of paid so far and debt remaining
+                    CalcSavings();
+                    CalcMoneySaved();
+                    break;
+            }
+        }
+
         public string Error
         {
             get { return sc.Error; }
@@ -282,31 +304,50 @@ namespace intcalc
         {
             get
             {
-                if (property == "Interest")
+                string res = null; 
+                switch (property)
                 {
-                    decimal it;
-                    string val = ValidateInterest(out it);
+                    case "Interest":
+                        {
+                            decimal it;
+                            string val = ValidateInterest(interest, out it);
 
-                    if (!String.IsNullOrEmpty(val)) return val;
+                            if (!String.IsNullOrEmpty(val)) return val;
 
-                    sc.Interest = it;
-                    CalcSavings();
-                    CalcMoneySaved();
+                            sc.Interest = it;
+                            CalcSavings();
+                            CalcMoneySaved();
+                            res = sc[property];
+                        }
+                        break;
+                    case "RentInflation":
+                        {
+                            decimal it;
+                            string val = ValidateInterest(rentInflation, out it);
+
+                            if (!String.IsNullOrEmpty(val)) return val;
+
+                            rc.RentInflation = it;
+                            CalcRent();
+                            CalcMoneySaved();
+                            res = rc[property];
+                        }
+                        break;
                 }
 
-                return sc[property];
+                return res;
             }
         }
 
-        string ValidateInterest(out decimal it)
+        string ValidateInterest(decimal input, out decimal it)
         {
             it = 1.0m;
 
             string val = null;
 
-            if (interest >= 1.0m && interest < 2.0m)
+            if (input >= 1.0m && input < 2.0m)
             {
-                it = interest;
+                it = input;
             }
             else val = "Invalid decimal!";
 
@@ -325,6 +366,7 @@ namespace intcalc
         String hcFile = "hc.dat";
         String rcFile = "rc.dat";
         decimal interest;
+        decimal rentInflation;
         int period;
         int mortgagePeriod;
         decimal houseSellPrice;

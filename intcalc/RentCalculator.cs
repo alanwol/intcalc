@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.ComponentModel;
 
 namespace intcalc
 {
     [Serializable()]
-    class RentCalculator
+    class RentCalculator : IDataErrorInfo
     {
         public RentCalculator()
         {
@@ -65,5 +66,23 @@ namespace intcalc
         decimal totalRent;
         decimal monthlyRent;
         decimal rentInflation;
+
+        public string Error { get { return null; } }
+
+        public string this[string property]
+        {
+            get
+            {
+                if (property == "RentInflation")
+                {
+                    if (this.RentInflation >= 2.0m)
+                    {
+                        return "Rent inflation cannot be >= 2.0";
+                    }
+                }
+
+                return null;
+            }
+        }
     }
 }
