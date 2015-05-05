@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
-using System.IO;
-using System.Diagnostics;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Globalization;
-using System.Threading;
 
 // http://joshsmithonwpf.wordpress.com/2008/11/14/using-a-viewmodel-to-provide-meaningful-validation-error-messages/
 
