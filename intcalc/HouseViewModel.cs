@@ -18,8 +18,6 @@ namespace intcalc
             sc = new SavingsCalculator();
 
             ReadInputData();
-
-            this.PropertyChanged += HandlePropertyChanged;
         }
 
         private void ReadInputData()
@@ -73,6 +71,7 @@ namespace intcalc
 
         public void CalcHousePrice()
         {
+            // TODO separate maintenance costs from mortgage cost
             TotalHousePrice = hc.CalcTotalHousePrice(mortgagePeriod);
             MortgageMonth   = hc.MortgageMonth;
         }
@@ -235,8 +234,15 @@ namespace intcalc
             get { return period; }
             set 
             {
-                period = value;
-                RaisePropertyChanged("Period");
+                if (period != value)
+                {
+                    period = value;
+                    CalcRent();
+                    //CalcHousePrice(); Should be replaced with calculation of paid so far and debt remaining
+                    CalcSavings();
+                    CalcMoneySaved();
+                    RaisePropertyChanged("Period");
+                }
             }
         }
 
@@ -245,8 +251,13 @@ namespace intcalc
             get { return mortgagePeriod; }
             set
             {
-                mortgagePeriod = value;
-                RaisePropertyChanged("MortgagePeriod");
+                if (mortgagePeriod != value)
+                {
+                    mortgagePeriod = value;
+                    CalcHousePrice();
+                    CalcMoneySaved();
+                    RaisePropertyChanged("MortgagePeriod");
+                }
             }
         }
 
@@ -259,30 +270,6 @@ namespace intcalc
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Interest":
-                    Console.WriteLine("Interest changed.");
-                    break;
-                case "RentInflation":
-                    Console.WriteLine("Rent inflation changed.");
-                    break;
-                case "MortgagePeriod":
-                    Console.WriteLine("Mortgage period changed.");
-                    CalcHousePrice();
-                    CalcMoneySaved();
-                    break;
-                case "Period":
-                    CalcRent();
-                    //CalcHousePrice(); Should be replaced with calculation of paid so far and debt remaining
-                    CalcSavings();
-                    CalcMoneySaved();
-                    break;
             }
         }
 
